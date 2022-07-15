@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/crypto/static/js/runtime~main.4ad730ee.js"
   },
   {
-    "revision": "1afcc86d68a18092524ac1f141bfe5b6",
+    "revision": "d2daaca3fa2e67bb6993ee64a7329342",
     "url": "/crypto/index.html"
   }
 ];
