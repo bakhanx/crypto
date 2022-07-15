@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "9930c2461e8f6a0caf38",
-    "url": "/crypto/static/js/main.9930c246.chunk.js"
+    "revision": "c126722a03330f191450",
+    "url": "/crypto/static/js/main.c126722a.chunk.js"
   },
   {
     "revision": "41211fcf000cf3a9973c",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/crypto/static/js/runtime~main.4ad730ee.js"
   },
   {
-    "revision": "95419eae56ad56fa5be75af820758f91",
+    "revision": "1afcc86d68a18092524ac1f141bfe5b6",
     "url": "/crypto/index.html"
   }
 ];
