@@ -9,7 +9,7 @@ export const Router = () => {
     <BrowserRouter>
      <TopNav />
       <Routes>
-        <Route path="/" element={<Coins />} />
+        <Route path="/crypto" element={<Coins />} />
         <Route path="/:coinId/*" element={<Coin />} />
       </Routes>
     </BrowserRouter>
