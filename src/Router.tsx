@@ -6,10 +6,10 @@ import { TopNav } from "./TopNav";
 
 export const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
      <TopNav />
       <Routes>
-        <Route path="/crypto" element={<Coins />} />
+        <Route path="/" element={<Coins />} />
         <Route path="/:coinId/*" element={<Coin />} />
       </Routes>
     </BrowserRouter>

@@ -66,7 +66,7 @@ export let TopNav = () => {
 
       <NavContainer>
         <Home>
-          <Link to={"/crypto"}>
+          <Link to={"/"}>
             <span className="material-symbols-outlined">monetization_on</span>
           </Link>
         </Home>
