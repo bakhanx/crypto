@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // ============== Style Component =============
 const Container = styled.div`
-  padding: 50px 20px;
+  padding-top : 50px;
 `;
 const Header = styled.header`
   height: 10vh;
@@ -17,25 +17,28 @@ const Title = styled.h1`
   font-size: 48px;
 `;
 const CoinList = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 360px 360px;
+  /* grid-column-gap: 20px; */
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  width: 100vw;
   justify-content: center;
   align-items: center;
 `;
 const Coin = styled.li`
-  padding: 10px;
-  background-color: ${props=>props.theme.listBgColor};
+  padding:10px;
+  background-color: ${(props) => props.theme.listBgColor};
   color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
-  width: 25%;
-
+  max-width: 720px;
   a {
     padding: 20px;
     transition: color 0.2s ease-in;
     display: flex;
     align-items: center;
-    font-size:20px;
+    font-size: 20px;
   }
   &:hover {
     a {
@@ -70,9 +73,9 @@ export const Coins = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      const data = await fetch(
-        "https://api.coinpaprika.com/v1/coins"
-      ).then((response) => response.json());
+      const data = await fetch("https://api.coinpaprika.com/v1/coins").then(
+        (response) => response.json()
+      );
       setCoins(data.slice(0, 10));
       setIsLoading(false);
     })();
@@ -81,7 +84,7 @@ export const Coins = () => {
   return (
     <Container>
       <Header>
-        <Title>Coins</Title>
+        <Title> Rank Top 10</Title>
       </Header>
       {isLoading ? (
         <Loading>Loading...</Loading>
