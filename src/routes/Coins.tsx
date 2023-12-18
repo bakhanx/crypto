@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// ============== Style Component =============
 const Container = styled.div`
   padding: 50px 20px;
 `;
@@ -54,11 +55,15 @@ const Img = styled.img`
   margin-right: 9px;
 `;
 
+// ============== Interface ================
+
 interface ICoins {
   id: string;
   name: string;
   symbol: string;
 }
+
+// ========================================
 
 export const Coins = () => {
   const [coins, setCoins] = useState<ICoins[]>([]);
@@ -68,8 +73,7 @@ export const Coins = () => {
       const data = await fetch(
         "https://api.coinpaprika.com/v1/coins"
       ).then((response) => response.json());
-      setCoins(data.slice(0, 100));
-      console.log(data);
+      setCoins(data.slice(0, 10));
       setIsLoading(false);
     })();
   }, []);
