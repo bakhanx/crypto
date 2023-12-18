@@ -11,6 +11,8 @@ import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
 
+
+// =========== Style Component ================
 const Container = styled.div`
   padding: 50px 20px;
   display: flex;
@@ -32,7 +34,6 @@ const Loading = styled.div`
   margin-top: 50px;
   text-align: center;
 `;
-
 const Overview = styled.div`
   width: 25%;
   display: flex;
@@ -58,7 +59,6 @@ const Description = styled.p`
   margin: 20px 0px;
   width: 25%;
 `;
-
 const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -66,7 +66,6 @@ const Tabs = styled.div`
   gap: 10px;
   width: 25%;
 `;
-
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
@@ -82,7 +81,7 @@ const Contents = styled.div`
   width:25%;
 `
 
-// Interface
+// =============== Interface ====================
 interface ILocation {
   state: {
     id: string;
@@ -147,6 +146,8 @@ interface IPriceData {
 interface IPrarms {
   coinId: string;
 }
+
+// ===============================================
 
 export const Coin = () => {
   const [infoData, setInfoData] = useState<IInfoData>();
