@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { FetchCoinTicker } from "../api";
+import { fetchCoinTicker } from "../api";
 
 interface IPriceProps {
   coinId?: string;
@@ -43,7 +43,7 @@ const PriceData = styled.div`
 
 const Price = ({ coinId }: IPriceProps) => {
   const { isLoading, data } = useQuery<IPriceUSD>(["USD", coinId], () =>
-    FetchCoinTicker(coinId)
+    fetchCoinTicker(coinId)
   );
   return (
     <div>
