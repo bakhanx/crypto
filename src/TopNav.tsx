@@ -30,7 +30,7 @@ const NavContainer = styled.div`
   position: fixed;
   background-color: ${(props) => props.theme.themeColor};
   width: 100vw;
-  max-width: 480px;
+  max-width: 720px;
   margin: auto;
   left:0;
   right:0;
