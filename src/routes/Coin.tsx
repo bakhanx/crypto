@@ -28,7 +28,7 @@ const Header = styled.header`
 `;
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
-  font-size: 48px;
+  font-size: 22px;
 `;
 const Loading = styled.div`
   font-size: 48px;
@@ -36,24 +36,27 @@ const Loading = styled.div`
   text-align: center;
 `;
 const Overview = styled.div`
-  width: 25%;
+  max-width: 720px;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
+  padding: 30px 40px;
   border-radius: 10px;
+  margin-top : 20px;
 `;
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  font-size : 12px;
+  
   span:first-child {
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 400;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 16px;
   }
 `;
 const Description = styled.p`
@@ -65,15 +68,16 @@ const Tabs = styled.div`
   grid-template-columns: repeat(2, 1fr);
   margin: 25px 0px;
   gap: 10px;
-  width: 25%;
+  max-width: 720px;
+  width: 100vw;
 `;
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400px;
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 7px 0px;
+  padding: 24px 0px;
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
@@ -175,28 +179,38 @@ export const Coin = () => {
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank:</span>
-              <span>{infoData?.rank}</span>
+              <span>시총 순위</span>
+              <span>{infoData?.rank || "null"}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol:</span>
-              <span>{infoData?.symbol}</span>
+              <span>시가 총액</span>
+              <span>${priceData?.quotes.market_cap || "null"}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Symbol</span>
+              <span>{infoData?.symbol || "null"}</span>
             </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          <Description>{infoData?.description || "No description"}</Description>
 
           <Overview>
             <OverviewItem>
-              <span>Total Supply:</span>
-              <span>{priceData?.total_supply}</span>
+              <span>현재 가격</span>
+              <span>${priceData?.quotes.price || "null"}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Max Supply:</span>
-              <span>{priceData?.max_supply}</span>
+              <span>거래량(24h)</span>
+              <span>${priceData?.quotes.volume_24h || "null"}</span>
+            </OverviewItem>
+          </Overview>
+          <Overview>
+            <OverviewItem>
+              <span>시가 총액</span>
+              <span>{priceData?.total_supply || "null"}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>변동률(24h)</span>
+              <span>{priceData?.quotes.percent_change_24h || "null"}</span>
             </OverviewItem>
           </Overview>
 

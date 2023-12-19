@@ -16,7 +16,8 @@ const Header = styled.header`
 `;
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
-  font-size: 48px;
+  font-size: 22px;
+  font-weight: 700;
 `;
 const CoinList = styled.ul`
   display: grid;
@@ -77,7 +78,7 @@ export const Coins = () => {
   return (
     <Container>
       <Header>
-        <Title> Rank Top 10</Title>
+        <Title> Top100 시가 총액별 암호화폐</Title>
       </Header>
       {isLoading ? (
         <Loading>Loading...</Loading>
