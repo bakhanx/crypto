@@ -28,7 +28,9 @@ const Header = styled.header`
 `;
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
-  font-size: 22px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
 `;
 const Loading = styled.div`
   font-size: 48px;
@@ -44,14 +46,15 @@ const Overview = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   padding: 30px 40px;
   border-radius: 10px;
-  margin-top : 20px;
+  margin-top: 20px;
 `;
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size : 12px;
-  
+  font-size: 24px;
+  font-weight: 900;
+
   span:first-child {
     font-size: 16px;
     font-weight: 400;
@@ -84,6 +87,15 @@ const Tab = styled.span<{ isActive: boolean }>`
 `;
 const Contents = styled.div`
   width: 25%;
+`;
+const Arrow = styled.div<{ isPositive: boolean }>`
+  display: inline;
+  font-size: 24px;
+  color: ${(props) => (props.isPositive ? "lime" : "red")};
+`;
+const Img = styled.img`
+  width: 40px;
+  margin-right: 9px;
 `;
 
 // =============== Interface ====================
@@ -128,23 +140,25 @@ interface IPriceData {
   first_data_at: string;
   last_updated: string;
   quotes: {
-    price: number;
-    volume_24h: number;
-    volume_24h_change_24h: number;
-    market_cap: number;
-    market_cap_change_24h: number;
-    percent_change_15m: number;
-    percent_change_30m: number;
-    percent_change_1h: number;
-    percent_change_6h: number;
-    percent_change_12h: number;
-    percent_change_24h: number;
-    percent_change_7d: number;
-    percent_change_30d: number;
-    percent_change_1y: number;
-    ath_price: number;
-    ath_date: string;
-    percent_from_price_ath: number;
+    KRW: {
+      price: number;
+      volume_24h: number;
+      volume_24h_change_24h: number;
+      market_cap: number;
+      market_cap_change_24h: number;
+      percent_change_15m: number;
+      percent_change_30m: number;
+      percent_change_1h: number;
+      percent_change_6h: number;
+      percent_change_12h: number;
+      percent_change_24h: number;
+      percent_change_7d: number;
+      percent_change_30d: number;
+      percent_change_1y: number;
+      ath_price: number;
+      ath_date: string;
+      percent_from_price_ath: number;
+    };
   };
 }
 
@@ -171,7 +185,12 @@ export const Coin = () => {
   return (
     <Container>
       <Header>
-        <Title>{state?.name || "Loading"}</Title>
+        <Title>
+          <Img
+            src={`https://coinicons-api.vercel.app/api/icon/${state.symbol.toLowerCase()}`}
+          ></Img>
+          {state?.name || "Loading"}
+        </Title>
       </Header>
       {infoLoading || priceLoading ? (
         <Loading>Loading...</Loading>
@@ -183,8 +202,13 @@ export const Coin = () => {
               <span>{infoData?.rank || "null"}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>시가 총액</span>
-              <span>${priceData?.quotes.market_cap || "null"}</span>
+              <span>현재 가격</span>
+              <span>
+                {priceData?.quotes.KRW.price.toLocaleString("ko-KR", {
+                  maximumFractionDigits: 0,
+                }) || "null"}
+                원
+              </span>
             </OverviewItem>
             <OverviewItem>
               <span>Symbol</span>
@@ -195,22 +219,39 @@ export const Coin = () => {
 
           <Overview>
             <OverviewItem>
-              <span>현재 가격</span>
-              <span>${priceData?.quotes.price || "null"}</span>
+              <span>시가 총액</span>
+              <span>
+                {priceData?.quotes.KRW.market_cap.toLocaleString("ko-KR", {
+                  maximumFractionDigits: 0,
+                }) || "null"}
+                원
+              </span>
             </OverviewItem>
             <OverviewItem>
               <span>거래량(24h)</span>
-              <span>${priceData?.quotes.volume_24h || "null"}</span>
+              <span>
+                {priceData?.quotes.KRW.volume_24h.toLocaleString("ko-KR", {
+                  maximumFractionDigits: 0,
+                }) || "null"}
+                원
+              </span>
             </OverviewItem>
           </Overview>
           <Overview>
             <OverviewItem>
-              <span>시가 총액</span>
+              <span>총 공급량</span>
               <span>{priceData?.total_supply || "null"}</span>
             </OverviewItem>
             <OverviewItem>
               <span>변동률(24h)</span>
-              <span>{priceData?.quotes.percent_change_24h || "null"}</span>
+              <span>
+                {(priceData?.quotes.KRW.percent_change_24h as number) > 0 ? (
+                  <Arrow isPositive={true}>⬆</Arrow>
+                ) : (
+                  <Arrow isPositive={false}>⬇</Arrow>
+                )}
+                {priceData?.quotes.KRW.percent_change_24h.toFixed(2) || "null"}%
+              </span>
             </OverviewItem>
           </Overview>
 
