@@ -11,14 +11,14 @@ export let fetchCoins = async () => {
 
 export let fetchCoinInfo = async (coinId: string) => {
   return await axios
-    .get(`${BASE_URL}/coins/${coinId}`)
+    .get(`${BASE_URL}/coins/${coinId}?quotes=KRW`)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
 
 export let fetchCoinTicker = async (coinId?: string) => {
   return await axios
-    .get(`${BASE_URL}/tickers/${coinId}`)
+    .get(`${BASE_URL}/tickers/${coinId}?quotes=KRW`)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
