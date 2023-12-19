@@ -10,7 +10,8 @@ import {
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
-
+import { useQuery } from "react-query";
+import { fetchCoinInfo, fetchCoinTicker } from "../api";
 
 // =========== Style Component ================
 const Container = styled.div`
@@ -78,8 +79,8 @@ const Tab = styled.span<{ isActive: boolean }>`
     props.isActive ? props.theme.accentColor : props.theme.textColor};
 `;
 const Contents = styled.div`
-  width:25%;
-`
+  width: 25%;
+`;
 
 // =============== Interface ====================
 interface ILocation {
@@ -150,35 +151,25 @@ interface IPrarms {
 // ===============================================
 
 export const Coin = () => {
-  const [infoData, setInfoData] = useState<IInfoData>();
-  const [priceData, setPriceData] = useState<IPriceData>();
-  const [isLoading, setIsLoading] = useState(true);
   const { coinId } = useParams();
   const { state } = useLocation() as ILocation;
   const chartMatch = useMatch("/:coinId/chart");
   const priceMatch = useMatch("/:coinId/price");
-
-  useEffect(() => {
-    (async () => {
-      const info = await (
-        await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
-      ).json();
-      const price = await (
-        await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
-      ).json();
-      setInfoData(info);
-      setPriceData(price);
-      setIsLoading(false);
-    })();
-  }, [coinId]);
-
+  const { data: infoData, isLoading: infoLoading } = useQuery<IInfoData>(
+    "coinInfo",
+    () => fetchCoinInfo(coinId as string)
+  );
+  const { data: priceData, isLoading: priceLoading } = useQuery<IPriceData>(
+    "coinPrice",
+    () => fetchCoinTicker(coinId as string)
+  );
 
   return (
     <Container>
       <Header>
         <Title>{state?.name || "Loading"}</Title>
       </Header>
-      {isLoading ? (
+      {infoLoading && priceLoading ? (
         <Loading>Loading...</Loading>
       ) : (
         <>
