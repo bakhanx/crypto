@@ -72,7 +72,7 @@ interface ICoins {
 // ========================================
 
 export const Coins = () => {
-  const { data:coins, isLoading } = useQuery<ICoins[]>("allCoins", fetchCoins);
+  const { data:coins, isLoading } = useQuery<ICoins[]>(["allCoins"], fetchCoins);
 
   return (
     <Container>

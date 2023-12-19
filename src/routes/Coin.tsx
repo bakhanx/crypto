@@ -156,11 +156,11 @@ export const Coin = () => {
   const chartMatch = useMatch("/:coinId/chart");
   const priceMatch = useMatch("/:coinId/price");
   const { data: infoData, isLoading: infoLoading } = useQuery<IInfoData>(
-    "coinInfo",
+    ["coinInfo", coinId],
     () => fetchCoinInfo(coinId as string)
   );
   const { data: priceData, isLoading: priceLoading } = useQuery<IPriceData>(
-    "coinPrice",
+    ["coinPrice", coinId],
     () => fetchCoinTicker(coinId as string)
   );
 
@@ -169,7 +169,7 @@ export const Coin = () => {
       <Header>
         <Title>{state?.name || "Loading"}</Title>
       </Header>
-      {infoLoading && priceLoading ? (
+      {infoLoading || priceLoading ? (
         <Loading>Loading...</Loading>
       ) : (
         <>
