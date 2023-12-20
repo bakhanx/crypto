@@ -10,5 +10,6 @@ declare module "styled-components" {
     chartColor:string;
     darkModeColor:string;
     listBgColor:string;
+    overviewColor:string;
   }
 }
