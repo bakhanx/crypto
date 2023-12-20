@@ -1,10 +1,10 @@
 import {DefaultTheme} from 'styled-components';
 
 export const darkTheme: DefaultTheme = {
-    bgColor: "#222f3e",
+    bgColor: "#1a1a1a",
     textColor: "#c8d6e5",
     accentColor: "#0abde3",
-    themeColor : "black",
+    themeColor : "#0d0d0d",
     chartColor : "dark",
     darkModeColor : "yellow",
     listBgColor : "black",
