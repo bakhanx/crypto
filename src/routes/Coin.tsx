@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Link,
   Route,
@@ -15,15 +15,18 @@ import { fetchCoinInfo, fetchCoinTicker } from "../api";
 
 // =========== Style Component ================
 const Container = styled.div`
-  padding: 50px 20px;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  max-width: 720px;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
+
 const Header = styled.header`
   height: 10vh;
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 const Title = styled.h1`
@@ -39,32 +42,37 @@ const Loading = styled.div`
 `;
 const Overview = styled.div`
   max-width: 720px;
-  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color:   ${(props) => props.theme.overviewColor};
   padding: 30px 40px;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   margin-top: 20px;
+
+  border-left-style: solid;
+  border-width: 2px;
+  border-image: linear-gradient(to bottom, gold, white, gold);
+  border-image-slice: 1;
 `;
 const OverviewItem = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 900;
 
-  span:first-child {
+  /* span:first-child {
     font-size: 16px;
     font-weight: 400;
     text-transform: uppercase;
     margin-bottom: 16px;
-  }
+  } */
 `;
 const Description = styled.p`
   margin: 20px 0px;
-  width: 25%;
+  margin-left: 10px;
 `;
 const Tabs = styled.div`
   display: grid;
@@ -84,6 +92,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
+  /* margin-left: 10px; */
 `;
 const Contents = styled.div`
   width: 25%;
@@ -187,7 +196,7 @@ export const Coin = () => {
       <Header>
         <Title>
           <Img
-            src={`https://coinicons-api.vercel.app/api/icon/${state.symbol.toLowerCase()}`}
+            src={`https://coinicons-api.vercel.app/api/icon/${state?.symbol.toLowerCase()}`}
           ></Img>
           {state?.name || "Loading"}
         </Title>
@@ -198,20 +207,34 @@ export const Coin = () => {
         <>
           <Overview>
             <OverviewItem>
-              <span>시총 순위</span>
-              <span>{infoData?.rank || "null"}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>현재 가격</span>
+              {/* 현재가격 */}
               <span>
                 {priceData?.quotes.KRW.price.toLocaleString("ko-KR", {
                   maximumFractionDigits: 0,
                 }) || "null"}
-                원
+                원 &nbsp;
+              </span>
+
+              <span>
+                {(priceData?.quotes.KRW.percent_change_24h as number) > 0 ? (
+                  <Arrow isPositive={true}>⬆</Arrow>
+                ) : (
+                  <Arrow isPositive={false}>⬇</Arrow>
+                )}
+                {priceData?.quotes.KRW.percent_change_24h.toFixed(2) || "null"}%
+                (24h)
               </span>
             </OverviewItem>
+          </Overview>
+
+          <Overview>
             <OverviewItem>
-              <span>Symbol</span>
+              <span>Rank : &nbsp;</span>
+              <span>{infoData?.rank || "null"}</span>
+            </OverviewItem>
+
+            <OverviewItem>
+              <span>Symbol : &nbsp;</span>
               <span>{infoData?.symbol || "null"}</span>
             </OverviewItem>
           </Overview>
@@ -219,7 +242,7 @@ export const Coin = () => {
 
           <Overview>
             <OverviewItem>
-              <span>시가 총액</span>
+              <span>시가총액 : &nbsp; </span>
               <span>
                 {priceData?.quotes.KRW.market_cap.toLocaleString("ko-KR", {
                   maximumFractionDigits: 0,
@@ -227,8 +250,17 @@ export const Coin = () => {
                 원
               </span>
             </OverviewItem>
+          </Overview>
+          <Overview>
             <OverviewItem>
-              <span>거래량(24h)</span>
+              <span>총 공급량 : &nbsp; </span>
+              <span>{priceData?.total_supply || "null"}</span>
+            </OverviewItem>
+          </Overview>
+
+          <Overview>
+            <OverviewItem>
+              <span>거래량(24h) : &nbsp; </span>
               <span>
                 {priceData?.quotes.KRW.volume_24h.toLocaleString("ko-KR", {
                   maximumFractionDigits: 0,
@@ -237,24 +269,6 @@ export const Coin = () => {
               </span>
             </OverviewItem>
           </Overview>
-          <Overview>
-            <OverviewItem>
-              <span>총 공급량</span>
-              <span>{priceData?.total_supply || "null"}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>변동률(24h)</span>
-              <span>
-                {(priceData?.quotes.KRW.percent_change_24h as number) > 0 ? (
-                  <Arrow isPositive={true}>⬆</Arrow>
-                ) : (
-                  <Arrow isPositive={false}>⬇</Arrow>
-                )}
-                {priceData?.quotes.KRW.percent_change_24h.toFixed(2) || "null"}%
-              </span>
-            </OverviewItem>
-          </Overview>
-
           <Tabs>
             <Tab isActive={chartMatch !== null}>
               <Link to="chart">Chart</Link>
