@@ -30,8 +30,6 @@ const NavContainer = styled.div`
   position: fixed;
   background-color: ${(props) => props.theme.themeColor};
   width: 100vw;
-  /* max-width: 480px; */
-  margin: auto;
   left: 0;
   right: 0;
   height: 100px;
@@ -48,13 +46,7 @@ const NavContainer = styled.div`
   border-image-slice: 1;
 `;
 
-const Card = styled.div`
-  border: 2px solid transparent;
-  background: linear-gradient(#fff, #fff),
-    linear-gradient(to right bottom, #fdd783, #eb7a89);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-`;
+
 
 const Section = styled.div``;
 const Home = styled.div`
