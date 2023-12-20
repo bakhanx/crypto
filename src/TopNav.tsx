@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { isDarkAtom } from "./atoms";
 
 const NavContainer = styled.div`
@@ -16,7 +16,7 @@ const NavContainer = styled.div`
     font-family: "Material Symbols Outlined";
     font-weight: normal;
     font-style: normal;
-    font-size: 40px;
+    font-size: 24px;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -30,20 +30,37 @@ const NavContainer = styled.div`
   position: fixed;
   background-color: ${(props) => props.theme.themeColor};
   width: 100vw;
-  max-width: 720px;
+  /* max-width: 480px; */
   margin: auto;
-  left:0;
-  right:0;
-  height: 50px;
+  left: 0;
+  right: 0;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   span {
     padding: 10px;
   }
+  padding : 30px;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-image: linear-gradient(to right, gold, gold, white, gold);
+  border-image-slice: 1;
 `;
+
+const Card = styled.div`
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff),
+    linear-gradient(to right bottom, #fdd783, #eb7a89);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+`;
+
+const Section = styled.div``;
 const Home = styled.div`
-  color: orange;
+  color: linear-gradient(to right, gold, gold, white, gold);
+  font-size: 32px;
+  font-style: italic oblique;
 `;
 
 const DarkMode = styled.div`
@@ -51,9 +68,31 @@ const DarkMode = styled.div`
   cursor: pointer;
 `;
 
+const gradient = keyframes`
+0% {
+  background-position: 0 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+100% {
+  background-position: 0 50%;
+}
+`;
+
+const AnimatedGradientText = styled.h1`
+  animation: ${gradient} 3s ease-in-out infinite;
+  background: linear-gradient(to right, gold, white, #2193b0, #6dd5ed);
+  background-size: 300%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 export let TopNav = () => {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
-  const ToggleDarkAtom = () =>{ setIsDark((current)=>!current)}
+  const ToggleDarkAtom = () => {
+    setIsDark((current) => !current);
+  };
   return (
     <>
       <head>
@@ -67,14 +106,11 @@ export let TopNav = () => {
       <NavContainer>
         <Home>
           <Link to={"/"}>
-            <span className="material-symbols-outlined">monetization_on</span>
+            <AnimatedGradientText>CRYPTO</AnimatedGradientText>
           </Link>
         </Home>
         <DarkMode>
-          <span
-            onClick={ToggleDarkAtom}
-            className="material-symbols-outlined"
-          >
+          <span onClick={ToggleDarkAtom} className="material-symbols-outlined">
             {isDark ? "dark_mode" : "light_mode"}
           </span>
         </DarkMode>
