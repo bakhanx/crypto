@@ -6,9 +6,9 @@ interface IPriceProps {
   coinId?: string;
 }
 
-interface IPriceUSD {
+interface IPriceKRW {
   quotes: {
-    USD: {
+    KRW: {
       ath_date: string;
       ath_price: number;
       market_cap: number;
@@ -42,7 +42,7 @@ const PriceData = styled.div`
 `;
 
 const Price = ({ coinId }: IPriceProps) => {
-  const { isLoading, data } = useQuery<IPriceUSD>(["USD", coinId], () =>
+  const { isLoading, data } = useQuery<IPriceKRW>(["KRW", coinId], () =>
     fetchCoinTicker(coinId)
   );
   return (
@@ -52,12 +52,12 @@ const Price = ({ coinId }: IPriceProps) => {
       ) : (
         <>
           <PriceData>
-            <div>ATH Data : {data?.quotes.USD.ath_date}</div>
-            <div>ATH Price : {data?.quotes.USD.ath_price}</div>
-            <div>ATH Date : {data?.quotes.USD.ath_date}</div>
-            <div>ATH Market Cap : {data?.quotes.USD.market_cap}</div>
-            <div>ATH Price : {data?.quotes.USD.price}</div>
-            <div>ATH Volume 24H : {data?.quotes.USD.volume_24h}</div>
+            <div>ATH Data : {data?.quotes.KRW.ath_date}</div>
+            <div>ATH Price : {data?.quotes.KRW.ath_price}</div>
+            <div>ATH Date : {data?.quotes.KRW.ath_date}</div>
+            <div>ATH Market Cap : {data?.quotes.KRW.market_cap}</div>
+            <div>ATH Price : {data?.quotes.KRW.price}</div>
+            <div>ATH Volume 24H : {data?.quotes.KRW.volume_24h}</div>
             <span>{`( *ATH : All time High )`}</span>
           </PriceData>
         </>
