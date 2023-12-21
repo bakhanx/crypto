@@ -107,7 +107,7 @@ export const Coins = () => {
         <Loading>Loading...</Loading>
       ) : (
         <CoinList>
-          {coins?.slice(0, 10).map((coin) => (
+          {coins?.slice(0, 100).map((coin) => (
             <Link to={`/${coin.id}`} state={coin} key={coin.id}>
               <Card>
                 <Coin>
