@@ -170,10 +170,6 @@ interface IPriceData {
   };
 }
 
-interface IPrarms {
-  coinId: string;
-}
-
 // ===============================================
 
 export const Coin = () => {

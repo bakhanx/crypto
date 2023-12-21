@@ -20,7 +20,6 @@ interface IHistorical {
 }
 
 const Chart = ({ coinId}: IChartProps) => {
-
   const isDark = useRecoilValue(isDarkAtom);
 
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
@@ -32,6 +31,7 @@ const Chart = ({ coinId}: IChartProps) => {
 
   return (
     <div>
+      
       {isLoading ? (
         "Chart Loading..."
       ) : (
