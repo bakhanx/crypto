@@ -95,7 +95,6 @@ const Tab = styled.span<{ isActive: boolean }>`
   /* margin-left: 10px; */
 `;
 const Contents = styled.div`
-  width: 25%;
 `;
 const Arrow = styled.div<{ isPositive: boolean }>`
   display: inline;
@@ -196,9 +195,9 @@ export const Coin = () => {
       <Header>
         <Title>
           <Img
-            src={`https://coinicons-api.vercel.app/api/icon/${state?.symbol.toLowerCase()}`}
+            src={`https://coinicons-api.vercel.app/api/icon/${state?.symbol.toLowerCase() || infoData?.symbol.toLowerCase()}`}
           ></Img>
-          {state?.name || "Loading"}
+          {state?.name || infoData?.name || "Loading..."}
         </Title>
       </Header>
       {infoLoading || priceLoading ? (
@@ -269,6 +268,7 @@ export const Coin = () => {
               </span>
             </OverviewItem>
           </Overview>
+
           <Tabs>
             <Tab isActive={chartMatch !== null}>
               <Link to="chart">Chart</Link>
