@@ -9,6 +9,7 @@ export const darkTheme: DefaultTheme = {
   darkModeColor: "yellow",
   listBgColor: "black",
   overviewColor: "#0f1f3d",
+  cardColor:"black",
 };
 export const lightTheme: DefaultTheme = {
   bgColor: "whitesmoke",
@@ -19,4 +20,5 @@ export const lightTheme: DefaultTheme = {
   darkModeColor: "orange",
   listBgColor: "white",
   overviewColor: "#c6d8eb",
+  cardColor:"#b0d2f5",
 };
