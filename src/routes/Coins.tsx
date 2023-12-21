@@ -44,7 +44,7 @@ const Coin = styled.li`
   padding: 20px;
   color: ${(props) => props.theme.textColor};
   max-width: 720px;
-  
+
   a {
     transition: color 0.2s ease-in;
     font-size: 20px;
@@ -54,12 +54,17 @@ const Coin = styled.li`
       color: ${(props) => props.theme.accentColor};
     }
   }
-
 `;
 const Card = styled.div`
   border: 2px solid transparent;
-  background: linear-gradient(black, black),
-    linear-gradient(to right bottom, #febb02, white);
+  background: linear-gradient(
+      to right bottom,
+      ${(props) => props.theme.cardColor},
+      ${(props) => props.theme.bgColor},
+      ${(props) => props.theme.cardColor}
+    ),
+    linear-gradient(to right top, #febb02, white);
+
   background-origin: border-box;
   background-clip: content-box, border-box;
   height: 240px;
@@ -103,9 +108,9 @@ export const Coins = () => {
       ) : (
         <CoinList>
           {coins?.slice(0, 10).map((coin) => (
-            <Link to={`/${coin.id}`} state={coin}>
+            <Link to={`/${coin.id}`} state={coin} key={coin.id}>
               <Card>
-                <Coin key={coin.id}>
+                <Coin>
                   <Img
                     src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
                   ></Img>
