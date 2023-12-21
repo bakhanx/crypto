@@ -11,5 +11,6 @@ declare module "styled-components" {
     darkModeColor:string;
     listBgColor:string;
     overviewColor:string;
+    cardColor:string;
   }
 }
