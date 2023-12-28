@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/crypto/static/js/main.e70cbb5a.js",
+    "main.js": "/crypto/static/js/main.c6ea6b40.js",
     "static/js/787.292a2857.chunk.js": "/crypto/static/js/787.292a2857.chunk.js",
     "index.html": "/crypto/index.html",
-    "main.e70cbb5a.js.map": "/crypto/static/js/main.e70cbb5a.js.map",
+    "main.c6ea6b40.js.map": "/crypto/static/js/main.c6ea6b40.js.map",
     "787.292a2857.chunk.js.map": "/crypto/static/js/787.292a2857.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.e70cbb5a.js"
+    "static/js/main.c6ea6b40.js"
   ]
 }
