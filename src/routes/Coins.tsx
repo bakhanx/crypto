@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoins } from "../api";
+import { useRecoilState } from "recoil";
+import { pageAtom } from "../atoms";
 
 // ============== Style Component =============
 const Container = styled.div`
@@ -81,6 +83,28 @@ const Img = styled.img`
   margin-bottom: 20px;
 `;
 
+const Button = styled.div`
+  width: 100%;
+  height: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 80px;
+    padding: 10px;
+    background-color: ${(props) => props.theme.cardColor};
+    color: ${(props) => props.theme.textColor};
+    border-radius: 8px;
+    :hover {
+      border-color: gold;
+      color:gold;
+      cursor: pointer;
+    }
+  }
+`;
+
 // ============== Interface ================
 
 interface ICoins {
@@ -91,12 +115,17 @@ interface ICoins {
 }
 
 // ========================================
-
+const OFFSET = 8;
 export const Coins = () => {
   const { data: coins, isLoading } = useQuery<ICoins[]>(
     ["allCoins"],
     fetchCoins
   );
+
+  const [page, setPage] = useRecoilState(pageAtom);
+  const handleMore = () => {
+    setPage((prev) => prev + 1);
+  };
 
   return (
     <Container>
@@ -106,27 +135,27 @@ export const Coins = () => {
       {isLoading ? (
         <Loading>Loading...</Loading>
       ) : (
-        <CoinList>
-          {coins?.slice(0, 100).map((coin) => (
-            <Link to={`/${coin.id}`} state={coin} key={coin.id}>
-              <Card>
-                <Coin>
-                  <Img
-                    src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
-                  ></Img>
-                  <span>{coin.name}</span>
-                </Coin>
-              </Card>
-            </Link>
-          ))}
-
-          {/* Dummy Data
-          {[1, 1, 1, 1].map(() => (
-            <Card>
-              <Coin>asd</Coin>
-            </Card>
-          ))} */}
-        </CoinList>
+        <>
+          <CoinList>
+            {coins?.slice(0, OFFSET * page).map((coin) => (
+              <Link to={`/${coin.id}`} state={coin} key={coin.id}>
+                <Card>
+                  <Coin>
+                    <Img
+                      src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                    ></Img>
+                    <span>{coin.name}</span>
+                  </Coin>
+                </Card>
+              </Link>
+            ))}
+          </CoinList>
+          <Button>
+            <div>
+              <button onClick={handleMore}>More</button>
+            </div>
+          </Button>
+        </>
       )}
     </Container>
   );
