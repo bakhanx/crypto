@@ -23,7 +23,6 @@ const Container = styled.div`
   padding-left: 10px;
   padding-right: 10px;
 `;
-
 const Header = styled.header`
   height: 10vh;
   display: flex;
@@ -80,7 +79,7 @@ const Tabs = styled.div`
   margin: 25px 0px;
   gap: 10px;
   max-width: 720px;
-  width: 100vw;
+  width: 100%;
 `;
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
@@ -95,6 +94,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   /* margin-left: 10px; */
 `;
 const Contents = styled.div`
+width: 100%;
 `;
 const Arrow = styled.div<{ isPositive: boolean }>`
   display: inline;
@@ -114,7 +114,6 @@ interface ILocation {
     symbol: string;
   };
 }
-
 interface IInfoData {
   id: string;
   name: string;
@@ -135,7 +134,6 @@ interface IInfoData {
   first_data_at: string;
   last_data_at: string;
 }
-
 interface IPriceData {
   id: string;
   name: string;
@@ -192,7 +190,7 @@ export const Coin = () => {
         <Title>
           <Img
             src={`https://coinicons-api.vercel.app/api/icon/${state?.symbol.toLowerCase() || infoData?.symbol.toLowerCase()}`}
-          ></Img>
+          />
           {state?.name || infoData?.name || "Loading..."}
         </Title>
       </Header>
