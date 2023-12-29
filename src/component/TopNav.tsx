@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
-import { isDarkAtom } from "./atoms";
+import { isDarkAtom } from "../atoms";
 
 const NavContainer = styled.div`
   /* fonts.googleapi */
@@ -39,16 +39,13 @@ const NavContainer = styled.div`
   span {
     padding: 10px;
   }
-  padding : 30px;
+  padding: 30px;
   border-bottom-style: solid;
   border-width: 2px;
   border-image: linear-gradient(to right, gold, gold, white, gold);
   border-image-slice: 1;
 `;
 
-
-
-const Section = styled.div``;
 const Home = styled.div`
   color: linear-gradient(to right, gold, gold, white, gold);
   font-size: 32px;
@@ -77,6 +74,7 @@ const AnimatedGradientText = styled.h1`
   background: linear-gradient(to right, gold, white, #2193b0, #6dd5ed);
   background-size: 300%;
   background-clip: text;
+  -webkit-background-clip: text; // Mobile
   -webkit-text-fill-color: transparent;
 `;
 

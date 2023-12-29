@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Coin } from "./routes/Coin";
 import { Coins } from "./routes/Coins";
 import React from "react";
-import { TopNav } from "./TopNav";
+import { TopNav } from "./component/TopNav";
 
 export const Router = () => {
   return (
