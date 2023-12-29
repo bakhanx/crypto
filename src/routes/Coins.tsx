@@ -46,7 +46,6 @@ const Coin = styled.li`
   padding: 20px;
   color: ${(props) => props.theme.textColor};
   max-width: 720px;
-
   a {
     transition: color 0.2s ease-in;
     font-size: 20px;
@@ -55,6 +54,9 @@ const Coin = styled.li`
     a {
       color: ${(props) => props.theme.accentColor};
     }
+  }
+  span{
+    text-align: center;
   }
 `;
 const Card = styled.div`
